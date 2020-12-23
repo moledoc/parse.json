@@ -1,21 +1,13 @@
+# Dependencies ----
 library(data.table)
 
-## DEVELOPMENT ----
-# # TEMP: remove todor, when building package
-# library(todor)
-# todor()
-#
-# # TEMP: for testing purposes only
-# test <- list(val1=1,val2=1:12,c(12,2,3,4))
-# test1 = list(lstOflst = list(lstInner = list(1:3,3:5,5:6,list(1,2),ts=list(asi=1:4))),lst=list(1,2,3,4),vec=c(1,2,3,4),vec2=1:19,single=5,list(5,3,2,1))
-#
-# test2 <- data.table::data.table(test=list(l1.1=c(1,2,3,4),l1.2=list(l21=1,l22=2,l23=3),l1.3=4),list(1:4))
-# test3 <- data.table::data.table(iris)
-
-# TODO: documentation (roxygen)
-
 # Package ----
-# NOTE: assumes list, not a data.frame or data.table (even though they use lists internaly)
+#' Prepare json elements
+#'
+#' Get and format all the elements in the list into a json format.
+#' It takes in a list and for each element produces the json format of that element.
+#' @param json list which elements are parsed into json format.
+#' @return Returns json format of each element in the list.
 prepare.elements <- function(json){
   dt <- data.table::data.table(keys=names(json),values=json,check.names = T)
   elements<-apply(dt,1,function(x){
@@ -28,14 +20,26 @@ prepare.elements <- function(json){
   return(elements)
 }
 
+#' Put together the final json
+#'
+#' Take list elements, that have been parsed into json format and combine them into single json element.
+#' @param json list that is to be parsed into json.
 prepare.json <- function(json){
-  return(paste0('{',prepare.elements(json),'}',collapse=','))
+  return(paste0('{',paste0(prepare.elements(json),collapse=','),'}',collapse=','))
 }
 
-# TODO: handle data.frames/data.tables. is.data.frame/is.data.table
-write.json <- function(to_json,file = 'new_file.json', url = ''){
-  if(!is.data.frame(to_json)){
+#' Write list as json
+#'
+#' Write given list to given file in json format. Even though data.table and data.frame use lists, then these structures are not supported and strictly lists must be used.
+#' @param to_json list that is to be written out as json.
+#' @param file the name of the file, where the json is written. By default it is written in the working directory as 'new_file.json'
+#' @export
+write.json <- function(to_json,file = 'new_file.json'){
+  tryCatch({
     json <- prepare.json(json = to_json)
     data.table::fwrite(x = list(json),file = file)
-  }
+  },error = function(err){
+    print(err)
+    print('data.frames and data.tables are not supported, use strictly lists!')
+  })
 }
