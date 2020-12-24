@@ -4,7 +4,7 @@
 \alias{prepare.elements}
 \title{Prepare json elements}
 \usage{
-prepare.elements(json)
+prepare.elements(json, depth = 1)
 }
 \arguments{
 \item{json}{list which elements are parsed into json format.}

@@ -8,13 +8,18 @@ library(data.table)
 #' It takes in a list and for each element produces the json format of that element.
 #' @param json list which elements are parsed into json format.
 #' @return Returns json format of each element in the list.
-prepare.elements <- function(json){
+prepare.elements <- function(json,depth=1){
   dt <- data.table::data.table(keys=names(json),values=json,check.names = T)
+  if (is.null(names(json))){
+    dt$keys <- paste0('V',depth,'.',1:nrow(dt))
+  }else{
+    dt[keys=='','keys'] <- paste0('V',depth,'.',1:length(dt[keys=='',values]))
+  }
   elements<-apply(dt,1,function(x){
     if(typeof(x$values) != 'list'){
       return(paste0(x$keys,':[',paste0(x$values,collapse=','),']'))
     } else{
-      return(paste0(x$keys,':{',paste0(prepare.elements(x$values),collapse=','),'}'))
+      return(paste0(x$keys,':{',paste0(prepare.elements(x$values,depth+1),collapse=','),'}'))
     }
   })
   return(elements)
