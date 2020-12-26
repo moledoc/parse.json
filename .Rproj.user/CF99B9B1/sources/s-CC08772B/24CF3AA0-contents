@@ -49,6 +49,6 @@ write.json <- function(to_json,file = 'new_file.json'){
     data.table::fwrite(x = list(json),file = file)
   },error = function(err){
     print(err)
-    print('data.frames and data.tables are not supported, use strictly lists!')
+    print('vectors, data.frames and data.tables are not supported, use strictly lists!')
   })
 }

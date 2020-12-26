@@ -3,23 +3,23 @@
     "path": "~/Documents/parse.json/R/write_json.R",
     "project_path": "R/write_json.R",
     "type": "r_source",
-    "hash": "3652545251",
+    "hash": "2271641296",
     "contents": "",
     "dirty": false,
     "created": 1608737265186.0,
     "source_on_save": false,
     "relative_order": 1,
     "properties": {
-        "cursorPosition": "2,0",
-        "scrollLine": "0",
-        "marks": "<:3,0\n>:3,0"
+        "cursorPosition": "51,19",
+        "scrollLine": "37",
+        "marks": "<:0,0\n>:0,0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1608817611,
+    "lastKnownWriteTime": 1608975127,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1608817611184,
+    "last_content_update": 1608975127722,
     "read_only": false,
     "read_only_alternatives": []
 }
