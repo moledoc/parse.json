@@ -12,7 +12,7 @@ prepare.elements <- function(json,depth=1){
   dt <- data.table::data.table(keys=names(json),values=json,check.names = T)
   if (is.null(names(json))){
     dt$keys <- paste0('V',depth,'.',1:nrow(dt))
-  }else{
+  }else if(length(dt[keys=='',values])>0){
     dt[keys=='','keys'] <- paste0('V',depth,'.',1:length(dt[keys=='',values]))
   }
   elements<-apply(dt,1,function(x){
