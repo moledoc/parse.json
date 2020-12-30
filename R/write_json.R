@@ -19,12 +19,12 @@ prepare.elements <- function(json,depth=1){
   elements <- apply(dt, 1, function(x){
     if (typeof(x$values) != 'list') {
       if (length(x$values) > 1) {
-        return(paste0(x$keys, ':[', paste0(x$values, collapse = ','),']'))
+        return(paste0("\"", x$keys, "\"", ':[', paste0(x$values, collapse = ','),']'))
       } else {
-        return(paste0(x$keys, ':', paste0(x$values, collapse = ',')))
+        return(paste0("\"", x$keys, "\"", ':', paste0(x$values, collapse = ',')))
       }
     } else{
-      return(paste0(x$keys, ':{', paste0(prepare.elements(x$values, depth + 1), collapse = ','), '}'))
+      return(paste0("\"", x$keys, "\"", ':{', paste0(prepare.elements(x$values, depth + 1), collapse = ','), '}'))
     }
   })
   return(elements)
@@ -48,9 +48,10 @@ prepare.json <- function(json){
 write.json <- function(to_json,file = 'new_file.json'){
   tryCatch({
     json <- prepare.json(json = to_json)
-    data.table::fwrite(x = list(json), file = file)
+    data.table::fwrite(x = list(json), file = file, quote = FALSE)
   },error = function(err){
     print(err)
     print('vectors, data.frames and data.tables are not supported, use strictly lists!')
   })
 }
+
