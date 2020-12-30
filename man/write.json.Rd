@@ -9,8 +9,8 @@ write.json(to_json, file = "new_file.json")
 \arguments{
 \item{to_json}{list that is to be written out as json.}
 
-\item{file}{the name of the file, where the json is written. By default it is written in the working directory as 'new_file.json'}
+\item{file}{the name of the file, where the json is written. By default it is written in the current working directory as 'new_file.json'.}
 }
 \description{
-Write given list to given file in json format. Even though data.table and data.frame use lists, then these structures are not supported and strictly lists must be used.
+Write given list to given file in json format. Even though data.table and data.frame use lists, then these structures are not supported and only lists can be written as json.
 }

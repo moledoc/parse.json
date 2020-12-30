@@ -2,13 +2,19 @@
 % Please edit documentation in R/read_json.R
 \name{read.json}
 \alias{read.json}
-\title{Read json in as list}
+\title{Read json in as a list}
 \usage{
-read.json(file = "")
+read.json(file = "", url = "")
 }
 \arguments{
 \item{file}{the name of the file, where the json is read from.}
+
+\item{url}{the url of the json to read.}
 }
 \description{
 Read in a json file and parse it into a R list.
+}
+\examples{
+read.json('examples/example.json') # Reads in an example json as list from examples/.
+read.json(url = 'https://www.dnd5eapi.co/api/spells/acid-arrow/' ) # Reads in json from given url as list.
 }

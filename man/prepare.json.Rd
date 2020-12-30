@@ -9,6 +9,9 @@ prepare.json(json)
 \arguments{
 \item{json}{list that is to be parsed into json.}
 }
+\value{
+list parsed into a json format.
+}
 \description{
 Take list elements, that have been parsed into json format and combine them into single json element.
 }
