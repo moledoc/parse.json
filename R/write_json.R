@@ -19,9 +19,17 @@ prepare.elements <- function(json,depth=1){
   elements <- apply(dt, 1, function(x){
     if (typeof(x$values) != 'list') {
       if (length(x$values) > 1) {
-        return(paste0("\"", x$keys, "\"", ':[', paste0(x$values, collapse = ','),']'))
+        if (typeof(x$values) == 'character') {
+          return(paste0('\"', x$keys, '\"', ':[\"', paste0(x$values, collapse = '\",\"'),'\"]'))
+        } else {
+          return(paste0('\"', x$keys, '\"', ':[', paste0(x$values, collapse = ','),']'))
+        }
       } else {
-        return(paste0("\"", x$keys, "\"", ':', paste0(x$values, collapse = ',')))
+        if (typeof(x$values) == 'character') {
+          return(paste0('\"', x$keys, '\"', ':\"', x$values,'\"'))
+        } else {
+          return(paste0('\"', x$keys, '\"', ':', x$values))
+        }
       }
     } else{
       return(paste0("\"", x$keys, "\"", ':{', paste0(prepare.elements(x$values, depth + 1), collapse = ','), '}'))
