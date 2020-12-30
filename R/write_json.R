@@ -1,8 +1,3 @@
-# Dependencies ----
-#' @import
-library(data.table)
-
-# Package ----
 #' Prepare json elements
 #'
 #' Get and format all the elements in the list into a json format.
@@ -16,26 +11,26 @@ prepare.elements <- function(json,depth=1){
   }else if (length(dt[keys == '',values]) > 0) {
     dt[keys == '','keys'] <- paste0('V', depth, '.', 1:length(dt[keys == '',values]))
   }
-  elements <- apply(dt, 1, function(x){
-    if (typeof(x$values) != 'list') {
-      if (typeof(x$values) == 'logical') {
-        x$values <- tolower(as.character(x$values))
+  elements <- apply(dt, 1, function(row){
+    if (typeof(row$values) != 'list') {
+      if (typeof(row$values) == 'logical') {
+        row$values <- tolower(as.character(row$values))
       }
-      if (length(x$values) > 1) {
-        if (typeof(x$values) == 'character') {
-          return(paste0('\"', x$keys, '\"', ':[\"', paste0(x$values, collapse = '\",\"'),'\"]'))
+      if (length(row$values) > 1) {
+        if (typeof(row$values) == 'character') {
+          return(paste0('\"', row$keys, '\"', ':[\"', paste0(row$values, collapse = '\",\"'),'\"]'))
         } else {
-          return(paste0('\"', x$keys, '\"', ':[', paste0(x$values, collapse = ','),']'))
+          return(paste0('\"', row$keys, '\"', ':[', paste0(row$values, collapse = ','),']'))
         }
       } else {
-        if (typeof(x$values) == 'character') {
-          return(paste0('\"', x$keys, '\"', ':\"', x$values,'\"'))
+        if (typeof(row$values) == 'character') {
+          return(paste0('\"', row$keys, '\"', ':\"', row$values,'\"'))
         } else {
-          return(paste0('\"', x$keys, '\"', ':', x$values))
+          return(paste0('\"', row$keys, '\"', ':', row$values))
         }
       }
     } else{
-      return(paste0("\"", x$keys, "\"", ':{', paste0(prepare.elements(x$values, depth + 1), collapse = ','), '}'))
+      return(paste0("\"", row$keys, "\"", ':{', paste0(prepare.elements(row$values, depth + 1), collapse = ','), '}'))
     }
   })
   return(elements)
@@ -65,4 +60,3 @@ write.json <- function(to_json,file = 'new_file.json'){
     print('vectors, data.frames and data.tables are not supported, use strictly lists!')
   })
 }
-

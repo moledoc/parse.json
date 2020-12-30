@@ -7,6 +7,11 @@ Maintainer: Meelis Utt <meelis.utt@gmail.com>
 Description: This is a package to read json objects into R list
     or write a R list into json object. This package is written using
     only R. In this package, the package data.table is used.
+Depends:
+    R (>= 3.6.3),
+    data.table (>= 1.13.4)
+Imports:
+    data.table
 License: MIT
 Encoding: UTF-8
 LazyData: true
