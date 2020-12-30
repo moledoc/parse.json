@@ -1,4 +1,5 @@
 # Dependencies ----
+#' @import
 library(data.table)
 
 # Package ----
