@@ -6,17 +6,17 @@
 #' @export
 read.json <- function(file = '', url = ''){
   tryCatch({
-    if(url != ''){
+    if (url != '') {
       file <- tempfile()
       download.file(url = url, destfile = file)
     }
-    file_content <- readChar(file,file.info(file)$size)
-    file_content <- gsub(pattern = '{',replacement = 'list(',x = file_content,fixed = T)
-    file_content <- gsub(pattern = '[',replacement = 'c(',x = file_content,fixed = T)
-    file_content <- gsub(pattern = ':',replacement = '=',x = file_content,fixed = T)
-    file_content <- gsub(pattern = ']|}',replacement = ')',x = file_content)
-    file_content <- gsub(pattern = '[f,F]alse',replacement = 'FALSE',x = file_content)
-    file_content <- gsub(pattern = '[t,T]rue',replacement = 'TRUE',x = file_content)
+    file_content <- readChar(file, file.info(file)$size)
+    file_content <- gsub(pattern = '{', replacement = 'list(', x = file_content,fixed = T)
+    file_content <- gsub(pattern = '[', replacement = 'c(', x = file_content,fixed = T)
+    file_content <- gsub(pattern = ':', replacement = '=', x = file_content,fixed = T)
+    file_content <- gsub(pattern = ']|}', replacement = ')', x = file_content)
+    file_content <- gsub(pattern = '[f,F]alse', replacement = 'FALSE', x = file_content)
+    file_content <- gsub(pattern = '[t,T]rue', replacement = 'TRUE', x = file_content)
     file_content <- eval(parse(text = file_content))
     return(file_content)
   },error = function(err){
