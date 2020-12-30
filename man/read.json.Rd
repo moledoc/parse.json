@@ -15,6 +15,8 @@ read.json(file = "", url = "")
 Read in a json file and parse it into a R list.
 }
 \examples{
-read.json('examples/example.json') # Reads in an example json as list from examples/.
+read.json('examples/example_json_self.json') # Reads in an example json as list from examples/.
+read.json('examples/example_json_self_written.json') # Reads in an example json as list from examples/.
+read.json('examples/dnd_example.json') # Reads in an example json as list from examples/.
 read.json(url = 'https://www.dnd5eapi.co/api/spells/acid-arrow/' ) # Reads in json from given url as list.
 }

@@ -12,5 +12,8 @@ write.json(to_json, file = "new_file.json")
 \item{file}{the name of the file, where the json is written. By default it is written in the current working directory as 'new_file.json'.}
 }
 \description{
-Write given list to given file in json format. Even though data.table and data.frame use lists, then these structures are not supported and only lists can be written as json.
+Write given list to given file in json format. Structures such as data.frame and data.table work also.
+}
+\examples{
+write.json(lst) # The argument value of lst is in examples/example_list.txt.
 }

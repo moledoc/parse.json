@@ -1,0 +1,1 @@
+list(fst_list=list(snd_list=list(1,2,desc="This is a example description"),bool=TRUE),vec1=1:10,vec2=c("tst1","tst2"),single1=5,single2="tst",single3=F,data.frame(col1=1:15,col2=16:30),factor_list=list(factor(rep('a',3))),factor_df=iris)

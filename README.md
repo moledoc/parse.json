@@ -28,6 +28,7 @@ This package uses the following additional packages: **data.table**.
 ## Notes
 
 * When writing out list as json, any logical (true/false) values are written out as strings. When using this package to read in that json file, then the logical values are read in as logical. However, when the file in with eg Python, the logical values are read in as strings.
+* Currently in write.json, if list/data.frame/data.table contains a factor value, then all values in the json are strings.
 
 ## Issues
 
