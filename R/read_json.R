@@ -1,10 +1,15 @@
-#' Read json in as list
+#' Read json in as a list
 #'
 #' Read in a json file and parse it into a R list.
 #' @param file the name of the file, where the json is read from.
+#' @param url the url of the json to read.
 #' @export
-read.json <- function(file = ''){
+read.json <- function(file = '', url = ''){
   tryCatch({
+    if(url != ''){
+      file <- tempfile()
+      download.file(url = url, destfile = file)
+    }
     file_content <- readChar(file,file.info(file)$size)
     file_content <- gsub(pattern = '{',replacement = 'list(',x = file_content,fixed = T)
     file_content <- gsub(pattern = '[',replacement = 'c(',x = file_content,fixed = T)
