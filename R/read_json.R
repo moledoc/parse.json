@@ -3,6 +3,7 @@
 #' Read in a json file and parse it into a R list. If both parameters (file,url) are provided, then url value is used.
 #' @param file the name of the file, where the json is read from.
 #' @param url the url of the json to read.
+#' @importFrom utils download.file
 #' @export
 #' @examples
 #' read.json('examples/example_json_self.json') # Reads in an example json as list from examples/.

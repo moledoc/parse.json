@@ -8,11 +8,9 @@ Description: This is a package to read json objects into R list
     or write a R list into json object. This package is written using
     only R.
 Depends:
-    R (>= 3.6.3),
+    R (>= 3.6.0),
     data.table (>= 1.13.4)
-Imports:
-    data.table
-License: MIT
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1

@@ -2,3 +2,5 @@
 
 export(read.json)
 export(write.json)
+import(data.table)
+importFrom(utils,download.file)

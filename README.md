@@ -4,22 +4,29 @@ parse.json
 
 ## Synopsis 
 
-<!-- TODO: -->
+This is a package to read json objects into R list or write a R list into json object. This package is written using only R.
 
+## Setup
 
-## Download
+There are multiple ways to set up the package:
 
-Download the whole repository
+  <!-- TODO: -->
+  * Download the whole repository
 
 ```sh
 git clone https://github.com/moledoc/parse.json.git
 ```
 
-or download the repository/just the tar.xz file from the repository.
+  <!-- TODO: -->
+  * Download the repository as a zip file.
+  
+  <!-- TODO: -->
+  * Download only package source file. Package source file is named as parse.json_<version>.tar.gz.
+
 
 ## Dependecies
 
-This package uses the following additional packages: **data.table**.
+This package uses the following additional packages/functions: **data.table**; **utils** function download.file().
 
 ## Overview
 
@@ -30,6 +37,10 @@ This package uses the following additional packages: **data.table**.
 * Notes: currently none
 * Issues: currently none
 * TODO: currently none
+
+## License
+
+This package is available under MIT license.
 
 ## Author
 

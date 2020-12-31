@@ -67,6 +67,7 @@ prepare.json <- function(json){
 #' Write given list to given file in json format. Structures such as data.frame and data.table work as well (also inside the list).
 #' @param to_json list that is to be written out as json.
 #' @param file the name of the file, where the json is written. By default it is written in the current working directory as 'new_file.json'.
+#' @import data.table
 #' @export
 #' @examples
 #' write.json(lst) # The argument value of lst is in examples/example_list.txt. The result can also be found at examples/example_list_written_out.json
