@@ -23,19 +23,22 @@ prepare.elements <- function(json,depth=1){
     # parse value, depending on whether it is a vector or a single value.
     # Also, handle string values differently by adding quotes.
     if (typeof(row$values) != 'list') {
-      if (typeof(row$values) == 'logical') {
-        row$values <- tolower(as.character(row$values))
-      }
       if (length(row$values) > 1) {
         if (typeof(row$values) == 'character') {
           return(paste0('\"', row$keys, '\"', ':[\"', paste0(row$values, collapse = '\",\"'),'\"]'))
         } else {
+          if (typeof(row$values) == 'logical') {
+            row$values <- tolower(as.character(row$values))
+          }
           return(paste0('\"', row$keys, '\"', ':[', paste0(row$values, collapse = ','),']'))
         }
       } else {
         if (typeof(row$values) == 'character') {
           return(paste0('\"', row$keys, '\"', ':\"', row$values,'\"'))
         } else {
+          if (typeof(row$values) == 'logical') {
+            row$values <- tolower(as.character(row$values))
+          }
           return(paste0('\"', row$keys, '\"', ':', row$values))
         }
       }
