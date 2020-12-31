@@ -8,6 +8,8 @@ prepare.elements(json, depth = 1)
 }
 \arguments{
 \item{json}{list which elements are parsed into json format.}
+
+\item{depth}{parameter to keep track of the depth of given list list.}
 }
 \value{
 Returns json format of each element in the list.

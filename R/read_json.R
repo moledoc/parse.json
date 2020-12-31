@@ -1,6 +1,6 @@
 #' Read json in as a list
 #'
-#' Read in a json file and parse it into a R list.
+#' Read in a json file and parse it into a R list. If both parameters (file,url) are provided, then url value is used.
 #' @param file the name of the file, where the json is read from.
 #' @param url the url of the json to read.
 #' @export

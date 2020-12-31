@@ -12,7 +12,7 @@ read.json(file = "", url = "")
 \item{url}{the url of the json to read.}
 }
 \description{
-Read in a json file and parse it into a R list.
+Read in a json file and parse it into a R list. If both parameters (file,url) are provided, then url value is used.
 }
 \examples{
 read.json('examples/example_json_self.json') # Reads in an example json as list from examples/.
