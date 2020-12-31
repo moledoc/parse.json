@@ -3,6 +3,7 @@
 #' Get and format all the elements in the list into a json format.
 #' It takes in a list and for each element produces the json format of that element.
 #' @param json list which elements are parsed into json format.
+#' @param depth parameter to keep track of the depth of given list list.
 #' @return Returns json format of each element in the list.
 prepare.elements <- function(json,depth=1){
   # Make list into data table, where one column is keys and other values.
@@ -16,11 +17,13 @@ prepare.elements <- function(json,depth=1){
   elements <- apply(dt, 1, function(row){
     # If value is data.frame, make it into a list, so it can be parsed.
     if (is.data.frame(row$values)) {
-      row$values <- data.table::data.table(as.matrix(row$values),stringsAsFactors = F)
       row$values <- as.list(row$values)
     }
-    # If value is not list, then
-    # parse value, depending on whether it is a vector or a single value.
+    # If list has levels (meaning it has factor value), replace numeric values with it's labels.
+    if (!is.null(levels(row$values))) {
+      row$values <- levels(row$values)[row$values]
+    }
+    # If value is not list, then parse value, depending on whether it is a vector or a single value.
     # Also, handle string values differently by adding quotes.
     if (typeof(row$values) != 'list') {
       if (length(row$values) > 1) {
@@ -43,7 +46,7 @@ prepare.elements <- function(json,depth=1){
         }
       }
     } else{
-      # If value is list, then parse inner list.
+      # If value is list, then parse inner list recursively.
       return(paste0("\"", row$keys, "\"", ':{', paste0(prepare.elements(row$values, depth + 1), collapse = ','), '}'))
     }
   })
@@ -61,21 +64,20 @@ prepare.json <- function(json){
 
 #' Write list as json
 #'
-#' Write given list to given file in json format. Structures such as data.frame and data.table work also.
+#' Write given list to given file in json format. Structures such as data.frame and data.table work as well (also inside the list).
 #' @param to_json list that is to be written out as json.
 #' @param file the name of the file, where the json is written. By default it is written in the current working directory as 'new_file.json'.
 #' @export
 #' @examples
-#' write.json(lst) # The argument value of lst is in examples/example_list.txt.
+#' write.json(lst) # The argument value of lst is in examples/example_list.txt. The result can also be found at examples/example_list_written_out.json
+#' write.json(iris)
+#' write.json(cars)
 write.json <- function(to_json,file = 'new_file.json'){
   tryCatch({
-    if (is.data.frame(to_json)) {
-      to_json <- data.table::data.table(as.matrix(to_json),stringsAsFactors = F)
-    }
     json <- prepare.json(json = as.list(to_json))
     data.table::fwrite(x = list(json), file = file, quote = FALSE)
   },error = function(err){
     print(err)
-    #print('vectors, data.frames and data.tables are not supported, use strictly lists!')
   })
 }
+
